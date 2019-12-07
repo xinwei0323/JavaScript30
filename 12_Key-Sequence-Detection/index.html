@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+    <h1>試著輸入祕技“wesbos"<br>來看看觸發什麼特效吧！</h1>
+    <h2>已輸入的密碼：<span class="inputCode"></span></h2>
+<script>
+  const pressed=[];
+  const secretCode='wesbos';
+  window.addEventListener('keyup',(e)=>{
+    console.log(e.key);
+    pressed.push(e.key);
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+    if(pressed.join('').includes(secretCode)){
+      cornify_add();
+    }
+    document.querySelector('.inputCode').innerHTML = pressed.join('-');
+    console.log(pressed);
+  })
+</script>
+</body>
+</html>
