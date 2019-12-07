@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    div {
+      width: 100%;
+      padding: 100px;
+    }
+
+    .one {
+      background: thistle;
+    }
+
+    .two {
+      background: mistyrose;
+    }
+
+    .three {
+      background: coral;
+    }
+  </style>
+
+  <button>click</button>
+  <script>
+    // 取得頁面的所有div
+    const divs = document.querySelectorAll('div');
+    const button=document.querySelector('button');
+    function logText(e) {
+      // 印出當前div的class name
+      console.log(this.classList.value);
+      e.stopPropagation(); // stop bubbling!
+    }
+
+    // 為每個div加上click事件監聽
+    divs.forEach(div => div.addEventListener('click', logText, {
+      capture: false, // 預設為false
+    }));
+    button.addEventListener('click', () => {
+      console.log('Click!!!');
+    }, {
+      once: true
+    });
+  </script>
+</body>
+
+</html>
